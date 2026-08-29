@@ -1,0 +1,9 @@
+export enum StatutInscription {
+
+  VALIDEE = 'VALIDEE',
+  EN_ATTENTE = 'EN_ATTENTE',
+  LISTE_ATTENTE = 'LISTE_ATTENTE',
+  REFUSEE = 'REFUSEE',
+  ANNULEE = 'ANNULEE'
+
+}

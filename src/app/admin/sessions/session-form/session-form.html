@@ -1,0 +1,480 @@
+<!-- 
+ <div class="mb-6 bg-white rounded-lg shadow-sm border border-gray-200" dir="rtl">
+
+    <form class="row g-3">
+
+        <div class="mb-3 text-center">
+            <label class="form-label font-medium text-sm text-gray-600">
+                اسم الدورة التسجيل
+            </label>
+
+            <input
+                type="text"
+                name="libelle"
+                class="form-control text-center"
+                [(ngModel)]="currentSession.libelle"
+                placeholder="مثال: دورة التسجيل شتاء 2027">
+        </div>
+
+
+        <div class="mb-3 text-center">
+            <label class="form-label">
+                تاريخ افتتاح الدورة
+            </label>
+
+            <input
+                type="date"
+                class="form-control text-center"
+                name="dateOuverture"
+                [(ngModel)]="currentSession.dateOuverture">
+        </div>
+
+
+        <div class="mb-3 text-center">
+            <label class="form-label">
+                تاريخ اختتام الدورة
+            </label>
+
+            <input
+                type="date"
+                [(ngModel)]="currentSession.dateFermeture"
+                name="dateFermeture"
+                class="form-control text-center">
+        </div>
+
+
+        <div class="mb-3 text-center">
+            <label class="form-label">
+                عدد الأقسام
+            </label>
+
+            <input
+                type="number"
+                [(ngModel)]="currentSession.nombreClasses"
+                name="nombreClasses"
+                class="form-control text-center"
+                placeholder="أدخل عدد الأقسام">
+        </div>
+
+    </form>
+
+</div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6" dir="rtl">
+
+    <div
+        class="bg-white p-5 rounded-xl shadow-sm
+               border-r-4 border-green-500
+               border-t border-l border-b border-gray-200">
+
+        <div class="flex justify-between items-start mb-4">
+
+            <div
+                class="bg-gray-50 p-4 rounded-lg space-y-3
+                       text-center w-full">
+
+                <h3 class="font-bold text-lg mb-4">
+                    أنواع الأقسام
+                </h3>
+
+
+                <label
+                    class="flex items-center justify-center gap-3 cursor-pointer">
+
+                    <input
+                        type="checkbox"
+                        class="w-5 h-5 accent-green-600"
+                        [checked]="typesSelectionnes.includes(TypeClasse.CORAN)"
+                        (change)="toggleType(TypeClasse.CORAN)">
+
+                    <span class="font-medium">
+                        المدرسة القرآنية
+                    </span>
+
+                </label>
+
+
+                <br>
+
+
+                <label
+                    class="flex items-center justify-center gap-3 cursor-pointer">
+
+                    <input
+                        type="checkbox"
+                        class="w-5 h-5 accent-green-600"
+                        [checked]="typesSelectionnes.includes(TypeClasse.PREPARATOIRE)"
+                        (change)="toggleType(TypeClasse.PREPARATOIRE)">
+
+                    <span class="font-medium">
+                        الأقسام التحضيرية
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <div
+                class="flex gap-2 mt-4 pt-3
+                       border-t border-gray-100
+                       text-center">
+
+                <button
+                    type="button"
+                    (click)="saveOrUpdate()"
+                    class="btn btn-info px-4">
+
+                    <i class="fas fa-save"></i>
+
+                    {{ currentSession.id ? 'تعديل الدورة' : 'حفظ الدورة' }}
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="bg-white p-5 rounded-xl shadow-sm
+                   border-r-4 border-red-500
+                   border-t border-l border-b border-gray-200">
+
+            <div class="flex justify-between items-start mb-4">
+
+                <div class="w-full text-center">
+
+                    <h2 class="text-xl font-bold text-danger-800">
+
+                        {{ currentSession.libelle || 'دورة التسجيل' }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-6 mb-3 text-center w-full">
+
+                <h4 class="font-bold mb-3">
+                    حالة دورة التسجيل:
+                </h4>
+
+
+                <span
+                    *ngIf="currentSession && currentSession.active"
+                    class="text-success">
+
+                    🟢 دورة التسجيل مفتوحة
+
+                </span>
+
+
+                <span
+                    *ngIf="currentSession && !currentSession.active"
+                    class="text-danger">
+
+                    🔴 دورة التسجيل مغلقة
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="flex gap-2 mt-4 pt-3
+                       border-t border-gray-100">
+
+                <button
+                    type="button"
+                    class="btn btn-success btn-sm
+                           flex-1 flex items-center
+                           justify-center gap-2 text-white"
+                    (click)="ouvrirSession()"
+                    [disabled]="!currentSession.id || currentSession.active">
+
+                    <i class="fas fa-lock-open"></i>
+
+                    فتح دورة التسجيل
+
+                </button>
+
+                <button
+                    type="button"
+                    (click)="fermerSession()"
+                    [disabled]="!currentSession.id || !currentSession.active"
+                    class="btn btn-outline-danger btn-sm
+                           flex-1 flex items-center
+                           justify-center gap-2">
+
+                    <i class="fas fa-lock"></i>
+
+                    إغلاق دورة التسجيل
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div> -->
+
+<div class="card border-0 shadow-sm" dir="rtl">
+
+    <!-- ================= HEADER ================= -->
+    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+
+        <div>
+            <h4 class="fw-bold mb-1">
+                <i class="fa-solid fa-calendar-days text-success ms-2"></i>
+                دورات التسجيل
+            </h4>
+
+            <small class="text-muted">
+                إدارة دورات التسجيل وتحديد البرامج المتاحة
+            </small>
+        </div>
+
+        <button
+            type="button"
+            class="btn btn-success"
+            (click)="toggleFormulaire()">
+
+            <i class="fa-solid fa-plus ms-1"></i>
+            دورة جديدة
+        </button>
+
+    </div>
+
+
+    <!-- ================= FORMULAIRE ================= -->
+    <div class="card-body" *ngIf="isFormOpen">
+
+        <div class="border rounded p-4">
+
+            <h5 class="fw-bold mb-4 text-success">
+                <i class="fa-solid fa-pen-to-square ms-2"></i>
+                {{ currentSession.id ? 'تعديل دورة التسجيل' : 'إضافة دورة تسجيل' }}
+            </h5>
+
+
+            <!-- Informations générales -->
+            <div class="row g-3">
+
+                <!-- Libellé -->
+                <div class="col-md-6">
+
+                    <label class="form-label fw-bold">
+                        اسم الدورة
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="currentSession.libelle"
+                        >
+
+                </div>
+
+
+                <!-- Date début -->
+                <div class="col-md-3">
+
+                    <label class="form-label fw-bold">
+                        تاريخ البداية
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="currentSession.dateOuverture">
+
+                </div>
+
+
+                <!-- Date fin -->
+                <div class="col-md-3">
+
+                    <label class="form-label fw-bold">
+                        تاريخ النهاية
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control"
+                        [(ngModel)]="currentSession.dateFermeture">
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= TYPES ================= -->
+
+            <hr class="my-4">
+
+            <h6 class="fw-bold mb-3">
+                <i class="fa-solid fa-layer-group text-success ms-2"></i>
+                البرامج المتاحة للتسجيل
+            </h6>
+
+
+            <div class="row g-3">
+
+                <!-- CORAN -->
+                <div class="col-md-6">
+
+                    <div
+                        class="border rounded p-3"
+                        [class.border-success]="typesSelectionnes.includes(TypeClasse.CORAN)">
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [checked]="typesSelectionnes.includes(TypeClasse.CORAN)"
+                                (change)="toggleType(TypeClasse.CORAN)"
+                                id="coran">
+
+                            <label
+                                class="form-check-label fw-bold"
+                                for="coran">
+
+                                📖 المدرسة القرآنية
+
+                            </label>
+
+                        </div>
+
+                        <small class="text-muted me-4">
+                            تسجيل التلاميذ في المدرسة القرآنية
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREPA -->
+                <div class="col-md-6">
+
+                    <div
+                        class="border rounded p-3"
+                        [class.border-primary]="typesSelectionnes.includes(TypeClasse.PREPARATOIRE)">
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                [checked]="typesSelectionnes.includes(TypeClasse.PREPARATOIRE)"
+                                (change)="toggleType(TypeClasse.PREPARATOIRE)"
+                                id="prepa">
+
+                            <label
+                                class="form-check-label fw-bold"
+                                for="prepa">
+
+                                🎒 الأقسام التحضيرية
+
+                            </label>
+
+                        </div>
+
+                        <small class="text-muted me-4">
+                            تسجيل الأطفال في الأقسام التحضيرية
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= ACTIONS ================= -->
+
+            <hr class="my-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+
+                <!-- Gauche -->
+                <button
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    (click)="toggleFormulaire()">
+
+                    <i class="fa-solid fa-xmark ms-1"></i>
+                    إلغاء
+                </button>
+
+
+                <!-- Droite -->
+                <div class="d-flex gap-2">
+
+                    <button
+                        type="button"
+                        class="btn btn-success"
+                        (click)="saveOrUpdate()">
+
+                        <i class="fa-solid fa-floppy-disk ms-1"></i>
+
+                        {{ currentSession.id ? 'حفظ التعديلات' : 'إنشاء الدورة' }}
+
+                    </button>
+
+
+                    <!-- Ouvrir -->
+                    <button
+                        *ngIf="currentSession.id && !currentSession.active"
+                        type="button"
+                        class="btn btn-outline-success"
+                        (click)="ouvrirSession()">
+
+                        <i class="fa-solid fa-lock-open ms-1"></i>
+                        فتح الدورة
+
+                    </button>
+
+
+                    <!-- Fermer -->
+                    <button
+                        *ngIf="currentSession.id && currentSession.active"
+                        type="button"
+                        class="btn btn-outline-danger"
+                        (click)="fermerSession()">
+
+                        <i class="fa-solid fa-lock ms-1"></i>
+                        إغلاق الدورة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= MESSAGE ================= -->
+
+    <div
+        *ngIf="!isFormOpen"
+        class="card-body text-center text-muted py-5">
+
+        <i class="fa-solid fa-calendar-plus fa-2x mb-3"></i>
+
+        <p class="mb-0">
+            اضغط على «دورة جديدة» لإضافة أو تعديل دورة تسجيل
+        </p>
+
+    </div>
+
+</div>

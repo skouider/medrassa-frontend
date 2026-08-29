@@ -1,0 +1,22 @@
+<div class="container text-center py-5 animate__animated animate__zoomIn" dir="rtl" >
+  
+  <div class="bg-white p-5 shadow rounded-4" *ngIf="inscription.statut === 'VALIDEE'" >
+    <span class="text-6xl text-success mb-4 d-block">✅</span>
+    <h1 class="fw-bold text-[#064e3b]">تم تسجيل طلبكم بنجاح!</h1>
+    <p class="lead">رقم التسجيل الخاص بك هو: <span class="badge bg-success">{{inscription.reference}}</span></p>
+    <div class="mt-4">
+      
+    </div>
+  </div>
+  <div>
+    
+  </div>
+  <div class="bg-white p-5 shadow rounded-4" *ngIf="inscription.statut === 'LISTE_ATTENTE'">
+    <span class="text-6xl text-success mb-4 d-block">✅</span>
+    <h1 class="fw-bold text-[#064e3b]">تم تسجيل طلبكم!</h1>
+    <p class="lead">         تم إدراجكم في قائمة الانتظار  <span class="badge bg-success">{{inscription.reference}}</span></p>
+    <div class="mt-4">
+      
+    </div>
+  </div>
+</div>

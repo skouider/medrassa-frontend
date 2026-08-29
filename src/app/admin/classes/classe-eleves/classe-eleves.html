@@ -1,0 +1,228 @@
+<!-- <div class="mb-3">
+    <button
+        type="button"
+        class="btn btn-outline-primary"
+        routerLink="/admin/classes">
+
+        ← Retour aux classes
+
+    </button>
+</div>
+<div class="card shadow">
+
+    <div class="card-header text-center">
+
+        <h3 class="fw-bold">
+            👥 Élèves de la classe
+        </h3>
+
+        <p class="text-muted mb-0">
+            Classe ID : {{ classeId }}
+        </p>
+
+    </div>
+
+    <div class="card-body">
+
+        <ng-container *ngIf="eleves$ | async as eleves">
+
+            <div class="table-responsive">
+
+                <table
+                    class="table table-striped table-hover text-center align-middle">
+
+                    <thead>
+                        <tr>
+                            <th>Référence</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Date de naissance</th>
+                            <th>Téléphone</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let eleve of eleves">
+
+                            <td>{{ eleve.reference }}</td>
+
+                            <td>{{ eleve.nom }}</td>
+
+                            <td>{{ eleve.prenom }}</td>
+
+                            <td>{{ eleve.dateNaissance }}</td>
+
+                            <td>{{ eleve.telephone }}</td>
+
+                            <td>{{ eleve.statut }}</td>
+
+                        </tr>
+
+                        <tr *ngIf="eleves.length === 0">
+
+                            <td colspan="6" class="text-muted">
+                                Aucun élève inscrit dans cette classe.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </ng-container>
+
+    </div>
+
+</div> -->
+
+<div class="card shadow">
+
+    <!-- Bouton retour -->
+    <div class="card-header text-end">
+        <button
+            type="button"
+            class="btn btn-outline-success"
+            routerLink="/admin/classes">
+
+            <i class="fa-solid fa-arrow-right"></i>
+            العودة إلى قائمة الأقسام
+
+        </button>
+    </div>
+
+    <!-- En-tête -->
+    <div class="card-header text-center">
+
+        <h3 class="fw-bold">
+            👥 تلاميذ القسم
+        </h3>
+
+        <p class="text-muted mb-0">
+            رقم القسم : {{ classeId }}
+        </p>
+
+    </div>
+
+    <div class="card-body">
+
+        <ng-container *ngIf="eleves$ | async as eleves">
+
+            <div class="table-responsive">
+
+                <table
+                    class="table table-striped table-hover text-center align-middle">
+
+                    <thead>
+                        <tr>
+
+                            <th>المرجع</th>
+                            <th>اللقب</th>
+                            <th>الاسم</th>
+                            <th>تاريخ الميلاد</th>
+                            <th>رقم الهاتف</th>
+                            <th>الحالة</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let eleve of eleves">
+
+                            <td>
+                                {{ eleve.reference }}
+                            </td>
+
+                            <td>
+                                {{ eleve.nom }}
+                            </td>
+
+                            <td>
+                                {{ eleve.prenom }}
+                            </td>
+
+                            <td>
+                                {{ eleve.dateNaissance }}
+                            </td>
+
+                            <td>
+                                {{ eleve.telephone }}
+                            </td>
+
+                            <td>
+
+                                <span
+                                    *ngIf="eleve.statut === 'VALIDEE'"
+                                    class="badge bg-success">
+
+                                    مقبول
+
+                                </span>
+
+                                <span
+                                    *ngIf="eleve.statut === 'LISTE_ATTENTE'"
+                                    class="badge bg-warning text-dark">
+
+                                    في قائمة الانتظار
+
+                                </span>
+
+                                <span
+                                    *ngIf="eleve.statut === 'REFUSEE'"
+                                    class="badge bg-danger">
+
+                                    مرفوض
+
+                                </span>
+
+                                <span
+                                    *ngIf="eleve.statut === 'ANNULEE'"
+                                    class="badge bg-secondary">
+
+                                    ملغى
+
+                                </span>
+
+                                <span
+                                    *ngIf="eleve.statut === 'EN_ATTENTE'"
+                                    class="badge bg-info text-dark">
+
+                                    في انتظار المعالجة
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        <!-- Aucun élève -->
+                        <tr *ngIf="eleves.length === 0">
+
+                            <td
+                                colspan="6"
+                                class="text-muted text-center py-4">
+
+                                👤 لا يوجد أي تلميذ مسجل في هذا القسم.
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </ng-container>
+
+    </div>
+
+    <div class="card-footer"></div>
+
+</div>

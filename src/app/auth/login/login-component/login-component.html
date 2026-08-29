@@ -1,0 +1,47 @@
+<div class="container mt-5" style="max-width:400px">
+
+    <h3 class="text-center mb-4">
+
+        Connexion
+
+    </h3>
+
+    <div class="mb-3">
+
+        <label>Email</label>
+
+        <input
+                type="email"
+                class="form-control"
+                [(ngModel)]="loginRequest.email">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>Mot de passe</label>
+
+        <input
+                type="password"
+                class="form-control"
+                [(ngModel)]="loginRequest.password">
+
+    </div>
+
+    <button type="button"
+            class="btn btn-primary w-100"
+            (click)="login()">
+
+        Se connecter
+
+    </button>
+
+    <div
+    class="text-danger mt-3"
+    *ngIf="errorMessage()">
+
+    {{errorMessage()}}
+
+</div>
+
+</div>

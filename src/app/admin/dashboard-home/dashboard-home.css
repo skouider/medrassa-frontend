@@ -1,0 +1,21 @@
+.card{
+
+    border-radius:16px;
+
+    transition:0.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+h1{
+
+    font-size:42px;
+
+    font-weight:bold;
+
+}

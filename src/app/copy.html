@@ -1,0 +1,181 @@
+<div class="min-h-screen bg-[#f8faf9] flex items-center justify-center p-3 font-['Cairo']" dir="rtl">
+  
+  <div class="container bg-white shadow-lg rounded-[40px] p-4 p-md-5 border-t-8 border-[#064e3b]" style="max-width: 800px;">
+    
+    <!-- HEADER -->
+    <div class="text-center mb-5">
+      <div class="inline-block p-3 bg-green-50 rounded-full mb-3">
+        <span class="text-4xl">🕌</span>
+      </div>
+      <h1 class="h3 font-bold text-[#064e3b] mb-1">منصة التسجيل الإلكتروني</h1>
+      <p class="text-muted small">مرحباً بكم في رحاب مدرستنا</p>
+    </div>
+
+    <!-- ÉTAPE 1 : Choix du Programme -->
+    <div *ngIf="step === 1" class="animate__animated animate__fadeIn">
+      <h2 class="text-center h5 mb-4 font-bold text-secondary">اختر البرنامج التعليمي</h2>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <button (click)="goToStep(2, 'program', 'quran')" class="btn-quran-card">
+            <span class="display-6 mb-2">📖</span>
+            <span class="fw-bold">المدرسة القرآنية</span>
+            <small class="text-muted mt-2">لحفظ وتجويد القرآن الكريم</small>
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button (click)="goToStep(2, 'program', 'prep')" class="btn-quran-card">
+            <span class="display-6 mb-2">🎨</span>
+            <span class="fw-bold">القسم التحضيري</span>
+            <small class="text-muted mt-2">لتعلم الحروف والتربية الإسلامية</small>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 2 : Choix de l'Âge (Adulte ou Enfant) -->
+    <div *ngIf="step === 2" class="animate__animated animate__fadeIn">
+      <h2 class="text-center h5 mb-4 font-bold text-secondary">من سيسجل معنا؟</h2>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <button (click)="goToStep(3, 'ageGroup', 'child')" class="btn-quran-card">
+            <span class="display-6 mb-2">👶</span>
+            <span class="fw-bold">طفل (صغير)</span>
+            <small class="text-muted mt-2">أقل من 15 سنة</small>
+          </button>
+        </div>
+        <div class="col-md-6">
+          <button (click)="goToStep(3, 'ageGroup', 'adult')" class="btn-quran-card">
+            <span class="display-6 mb-2">👳</span>
+            <span class="fw-bold">بالغ (كبير)</span>
+            <small class="text-muted mt-2">أكثر من 15 سنة</small>
+          </button>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button (click)="step = 1" class="btn btn-link text-muted">← العودة للخطوة السابقة</button>
+      </div>
+    </div>
+
+    <!-- ÉTAPE 3 : Le Formulaire Final -->
+    <div *ngIf="step === 3" class="animate__animated animate__fadeIn">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h5 font-bold text-[#064e3b]">استمارة التسجيل</h2>
+        <span class="badge bg-green-100 text-[#064e3b] px-3 py-2 rounded-pill">
+          {{ selection.program === 'quran' ? 'مدرسة قرآنية' : 'قسم تحضيري' }}
+        </span>
+      </div>
+
+      <form class="row g-3">
+        <!-- Champ commun -->
+        <div class="col-md-6">
+          <label class="form-label font-bold text-secondary">الاسم الكامل للطالب</label>
+          <input type="text" class="form-control rounded-pill border-green-100" placeholder="الاسم واللقب">
+        </div>
+
+        <!-- Champ spécifique Enfant -->
+        <div class="col-md-6" *ngIf="selection.ageGroup === 'child'">
+          <label class="form-label font-bold text-secondary">اسم ولي الأمر</label>
+          <input type="text" class="form-control rounded-pill border-green-100" placeholder="اسم الأب أو الأم">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label font-bold text-secondary">تاريخ الميلاد</label>
+          <input type="date" class="form-control rounded-pill border-green-100">
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label font-bold text-secondary">رقم الهاتف للاتصال</label>
+          <input type="tel" class="form-control rounded-pill border-green-100" placeholder="05XXXXXXXX">
+        </div>
+
+        <!-- Champ spécifique Ecole Coranique -->
+        <div class="col-md-12" *ngIf="selection.program === 'quran'">
+          <label class="form-label font-bold text-secondary">مستوى الحفظ الحالي</label>
+          <select class="form-select rounded-pill border-green-100">
+            <option>مبتدئ (لا يحفظ)</option>
+            <option>حزب واحد أو أقل</option>
+            <option>أكثر من 5 أحزاب</option>
+            <option>خاتم للقرآن</option>
+          </select>
+        </div>
+
+        <div class="col-12 mt-5">
+          <button type="submit" class="w-100 py-3 rounded-pill bg-[#064e3b] text-white border-0 font-bold hover:opacity-90 shadow-lg">
+            تأكيد التسجيل النهائي
+          </button>
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <button (click)="step = 2" class="btn btn-sm btn-link text-muted">تغيير الفئة العمرية</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ****************************************** Page Inscription html -->
+<div class="container py-5" dir="rtl">
+  <!-- Step 1: Adult/Child -->
+  <div *ngIf="step === 1" class="text-center animate__animated animate__fadeIn">
+    <h2 class="fw-bold text-[#064e3b] mb-5">من هو الطالب؟</h2>
+    <div class="row justify-content-center g-4">
+      <div class="col-6 col-md-4">
+        <button (click)="setAgeGroup('child')" class="btn-select-card">
+          <span class="text-4xl">👶</span>
+          <span class="d-block mt-2 fw-bold">طفل</span>
+        </button>
+      </div>
+      <div class="col-6 col-md-4">
+        <button (click)="setAgeGroup('adult')" class="btn-select-card">
+          <span class="text-4xl">👳</span>
+          <span class="d-block mt-2 fw-bold">بالغ</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2: Full Form -->
+  <div *ngIf="step === 2" class="card border-0 shadow-lg rounded-4 p-4 p-md-5 mx-auto" style="max-width: 800px;">
+    <h2 class="text-center fw-bold text-[#064e3b] mb-4">استمارة التسجيل</h2>
+    <form class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label fw-bold">الاسم الكامل للطالب</label>
+        <input type="text" class="form-control rounded-pill">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-bold">تاريخ الميلاد</label>
+        <input type="date" class="form-control rounded-pill">
+      </div>
+      
+      <!-- Si c'est un enfant -->
+      <div class="col-md-12" *ngIf="isChild">
+        <label class="form-label fw-bold">اسم ولي الأمر ورقم هاتفه</label>
+        <input type="text" class="form-control rounded-pill" placeholder="الاسم الكامل - 05XXXXXXXX">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label fw-bold">الجنس</label>
+        <select class="form-select rounded-pill">
+          <option>ذكر</option>
+          <option>أنثى</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label fw-bold">مستوى الحفظ الحالي</label>
+        <select class="form-select rounded-pill">
+          <option>مبتدئ</option>
+          <option>جزء عم</option>
+          <option>أكثر من 5 أجزاء</option>
+        </select>
+      </div>
+
+      <div class="col-12 mt-5">
+        <button type="button" (click)="submit()" class="btn btn-success w-100 py-3 rounded-pill fw-bold text-xl">
+          تأكيد التسجيل
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,145 @@
+<!-- <div class="container mt-4">
+    <div class="mb-6 text-center" style="background-color: aqua;">
+        <h1 class="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <i class="fa-solid fa-school text-blue-600"></i> إدارة الأقسام
+        </h1>
+    </div>
+   
+    <div class="container-fluid vh-100">
+  <div class="row vh-50  text-white">
+    <div class="col d-flex align-items-center justify-content-center">
+      <app-classe-list></app-classe-list>
+    </div>
+  </div>
+
+  <div class="row vh-50 bg-light">
+    <div class="col d-flex align-items-center justify-content-center">
+      <app-classe-form></app-classe-form>
+    </div>
+  </div>
+</div>
+
+
+</div> -->
+<div class="container-fluid px-3 px-md-4 py-4">
+
+    <!-- ========================= -->
+    <!-- EN-TÊTE -->
+    <!-- ========================= -->
+
+    <div class="d-flex flex-column flex-md-row
+                justify-content-between
+                align-items-md-center
+                gap-3 mb-4">
+
+        <div>
+            <h1 class="h3 fw-bold mb-1">
+
+                <i class="fa-solid fa-school text-success me-2"></i>
+
+                إدارة الأقسام
+
+            </h1>
+
+            <p class="text-muted mb-0">
+
+                إدارة الأقسام الدراسية ومتابعة التلاميذ
+
+            </p>
+        </div>
+
+
+        <!-- Bouton nouveau -->
+
+        <button
+            *ngIf="!showForm"
+            class="btn btn-success px-4"
+            (click)="ouvrirFormulaire()">
+
+            <i class="fa-solid fa-plus me-2"></i>
+
+            انشاء قسم جديد
+
+        </button>
+
+
+        <!-- Bouton fermer -->
+
+        <button
+            *ngIf="showForm"
+            class="btn btn-outline-secondary px-4"
+            (click)="fermerFormulaire()">
+
+            <i class="fa-solid fa-xmark me-2"></i>
+
+            إغلاق
+
+        </button>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- LISTE DES CLASSES -->
+    <!-- ========================= -->
+
+    <div class="card border-0 shadow-sm mb-4">
+
+        <div class="card-header bg-white border-0 py-3">
+
+            <h5 class="fw-bold mb-1">
+
+                <i class="fa-solid fa-list text-success me-2"></i>
+
+                قائمة الأقسام
+
+            </h5>
+
+            <small class="text-muted">
+
+                عرض وإدارة الأقسام الدراسية
+
+            </small>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <app-classe-list></app-classe-list>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- FORMULAIRE -->
+    <!-- ========================= -->
+
+    <div
+        *ngIf="showForm"
+        class="card border-0 shadow-sm">
+
+        <div class="card-header bg-white border-0 py-3">
+
+            <h5 class="fw-bold mb-0">
+
+                <i class="fa-solid fa-pen-to-square text-success me-2"></i>
+
+                إنشاء أو تعديل قسم
+
+            </h5>
+
+        </div>
+
+
+        <div class="card-body">
+
+            <app-classe-form></app-classe-form>
+
+        </div>
+
+    </div>
+
+</div>

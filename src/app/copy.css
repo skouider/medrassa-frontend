@@ -1,0 +1,44 @@
+/* Import de la police Arabe */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+:host {
+    font-family: 'Cairo', sans-serif;
+}
+
+/* Bouton Style Carte Islamique */
+.btn-quran-card {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border: 2px solid #f0fdf4; /* Vert très clair */
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.btn-quran-card:hover {
+    border-color: #064e3b; /* Vert Coran */
+    background-color: #f0fdf4;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(6, 78, 59, 0.1);
+}
+
+.btn-quran-card span.fw-bold {
+    color: #064e3b;
+    font-size: 1.1rem;
+}
+
+/* Animation d'entrée */
+.animate__fadeIn {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

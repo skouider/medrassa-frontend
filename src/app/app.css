@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+:root {
+  --quran-green: #064e3b;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: #f8faf9;
+}
+
+/* Cartes de sélection */
+.btn-select-card {
+  width: 100%;
+  padding: 40px 20px;
+  background: white;
+  border: 2px solid #eef2ef;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.btn-select-card:hover {
+  border-color: var(--quran-green);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(6, 78, 59, 0.1);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-scale:hover {
+  transform: scale(1.03);
+}
+
+/* Customizing Bootstrap inputs */
+.form-control:focus, .form-select:focus {
+  border-color: var(--quran-green);
+  box-shadow: 0 0 0 0.25rem rgba(6, 78, 59, 0.1);
+}
+.app-content {
+  padding-top: 120px; /* remplace margin-top */
+}
+app-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 1000;
+}
+.public-content {
+  padding-top: 120px;
+}

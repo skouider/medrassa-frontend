@@ -1,0 +1,105 @@
+<div class="card">
+    <div class="card-header text-center " style="font-size: larger; color: brown;">إنشاء أقسام</div>
+    <div class="card-body">
+        <div class="p-6 bg-gray-50 min-h-screen">
+
+
+            <div class="mb-1 bg-white rounded-lg shadow-sm border border-gray-200">
+
+                <form class="row">
+                    <div class="mb-3 text-center">
+                        <label for="exampleFormControlInput1" class="form-label">دورة التسجيل</label>
+                        <select class="form-select" [(ngModel)]="currentClasse.session" name="session"
+                            (change)="onSessionChange()">
+
+                            <option *ngFor="let s of sessionListe" [ngValue]="s">
+                                {{ s.libelle }}
+                            </option>
+
+                        </select>
+                    </div>
+
+                    <div class="mb-3 text-center">
+                            <label class="form-label font-medium text-sm text-gray-600 text-center">
+                                اسم القسم</label>
+                            <input class="form-control" [(ngModel)]="currentClasse.nom" name="nom">
+                        </div>
+
+
+                    <div class="mb-3 text-center">
+                        الجنس
+
+                        <select class="form-select" [(ngModel)]="currentClasse.genre" name="genre"
+                            (change)="genererNomClasse()">
+
+                            <option *ngFor="let g of genres" [ngValue]="g">
+
+                                <span *ngIf="g === 'GARCON'">
+                                    ذكور
+                                </span>
+
+                                <span *ngIf="g === 'FILLE'">
+                                    إناث
+                                </span>
+
+                                <span *ngIf="g === 'MIXTE'">
+                                    مختلط
+                                </span>
+
+                            </option>
+
+                        </select>
+
+
+
+                        <div class="mb-3 text-center">
+                            <label for="exampleFormControlInput1" class="form-label">عدد التلاميذ</label>
+                            <input type="number" name="capacite" class="form-control"
+                                [(ngModel)]="currentClasse.capacite" id="exampleFormControlInput1" placeholder="">
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label for="exampleFormControlInput1" class="form-label">
+                                نوع التدريس</label>
+                            <select class="form-select" [(ngModel)]="currentClasse.typeClasse" name="typeClasse"
+                                (change)="genererNomClasse()">
+
+                                <option *ngFor="let t of typeDisponibles" [ngValue]="t">
+                                    <span *ngIf="t === 'CORAN'">
+                                        المدرسة القرآنية
+                                    </span>
+                                    <span *ngIf="t === 'PREPARATOIRE'">
+                                        الأقسام التحضيرية
+                                    </span>
+                                </option>
+
+                            </select>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label for="exampleFormControlInput1" class="form-label">الحد الأدنى للعمر</label>
+                            <input type="number" name="ageMin" class="form-control" [(ngModel)]="currentClasse.ageMin"
+                                id="exampleFormControlInput1" placeholder="">
+                        </div>
+                        <div class="mb-3 text-center">
+                            <label for="exampleFormControlInput1" class="form-label">الحد الأقصى للعمر</label>
+                            <input type="number" name="ageMax" class="form-control" [(ngModel)]="currentClasse.ageMax"
+                                id="exampleFormControlInput1" placeholder="">
+                        </div>
+
+                        
+
+                        <div class="mb-3 text-center">
+                            <button class="btn btn-outline-info" (click)="saveOrUpdate()">
+                                    {{ currentClasse.id ? 'تعديل القسم' : 'إضافة القسم' }}
+
+
+                            </button>
+                        </div>
+                        
+
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer"></div>
+        </div>

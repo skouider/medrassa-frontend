@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+*{
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    background:#f8fafc;
+}
+
+.hover-card{
+
+    transition:all .3s ease;
+}
+
+.hover-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+}
+
+.category-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:30px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    font-size:40px;
+
+    transition:.3s;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+.category-card:hover{
+
+    background:#dcfce7;
+
+    transform:translateY(-6px);
+}
+
+/* src/app/public/home/home.component.css */
+
+.hover-scale {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond doux */
+  cursor: pointer;
+  border: 2px solid transparent !important;
+}
+
+/* L'animation au survol */
+.hover-scale:hover {
+  transform: translateY(-15px) scale(1.02); /* Soulève la carte de 15px */
+  box-shadow: 0 20px 40px rgba(6, 78, 59, 0.15) !important; /* Ombre plus profonde */
+  border-color: #064e3b !important; /* Bordure verte qui apparaît */
+}
+
+/* Animation de l'icône (emoji) à l'intérieur de la carte */
+.hover-scale:hover .display-1 {
+  animation: bounce emoji 1s infinite;
+  display: inline-block;
+}
+
+@keyframes bounce-emoji {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Optionnel : Changement de couleur du bouton au survol de la carte */
+.hover-scale:hover .btn-outline-success {
+  background-color: #064e3b;
+  color: white;
+}

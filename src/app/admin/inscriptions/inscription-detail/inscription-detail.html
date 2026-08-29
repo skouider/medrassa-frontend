@@ -1,0 +1,132 @@
+<div class="card">
+
+    <div class="card-header">
+
+        تفاصيل التسجيل
+
+    </div>
+
+    <div class="card-body">
+
+        <p><b>الاسم :</b> {{inscription.nom}}</p>
+
+        <p><b>اللقب :</b> {{inscription.prenom}}</p>
+
+        <p><b>رقم الهاتف :</b> {{inscription.telephone}}</p>
+
+        <p><b>العنوان :</b> {{inscription.adresse}}</p>
+
+        <p><b>تاريخ الميلاد :</b> {{inscription.dateNaissance}}</p>
+
+        <p><b>القسم :</b> {{inscription.classe?.nom}}</p>
+
+        <p><b>حالة التسجيل :</b> {{inscription.statut}}</p>
+
+    </div>
+
+</div>
+<hr>
+
+<!-- الإجراءات -->
+
+<div class="card-footer">
+
+<div class="d-flex justify-content-center gap-2 flex-wrap">
+
+  <!-- قبول -->
+  <button
+    *ngIf="inscription.statut === 'LISTE_ATTENTE'"
+    type="button"
+    class="btn btn-success"
+    (click)="valider()">
+
+    <i class="fa-solid fa-check"></i>
+    قبول التسجيل
+
+  </button>
+
+  <!-- رفض -->
+  <button
+    *ngIf="inscription.statut === 'LISTE_ATTENTE'"
+    type="button"
+    class="btn btn-danger"
+    (click)="refuser()">
+
+    <i class="fa-solid fa-xmark"></i>
+    رفض التسجيل
+
+  </button>
+
+  <!-- إلغاء -->
+  <button
+    *ngIf="inscription.statut === 'VALIDEE'"
+    type="button"
+    class="btn btn-warning"
+    (click)="annuler()">
+
+    <i class="fa-solid fa-ban"></i>
+    إلغاء التسجيل
+
+  </button>
+
+  <!-- حذف -->
+  <button
+    type="button"
+    class="btn btn-outline-danger"
+    (click)="supprimer()">
+
+    <i class="fa-solid fa-trash"></i>
+    حذف التسجيل
+
+  </button>
+
+  <!-- إغلاق -->
+  <button
+    type="button"
+    class="btn btn-secondary"
+    (click)="close.emit()">
+
+    <i class="fa-solid fa-xmark"></i>
+    إغلاق
+
+  </button>
+
+</div>
+
+</div>
+
+
+<!-- <div class="d-grid gap-2">
+
+    <button *ngIf="inscription.statut=='LISTE_ATTENTE'" class="btn btn-success" (click)="valider()">
+
+        <i class="fa-solid fa-check"></i>
+
+        مقبول
+
+    </button>
+
+    <button *ngIf="inscription.statut=='LISTE_ATTENTE'" class="btn btn-danger" (click)="refuser()">
+
+        <i class="fa-solid fa-xmark"></i>
+
+        مرفوض
+
+    </button>
+
+    <button *ngIf="inscription.statut=='VALIDEE'" class="btn btn-warning" (click)="annuler()">
+
+        <i class="fa-solid fa-ban"></i>
+
+        ملغى
+
+    </button>
+
+    <button class="btn btn-danger" (click)="supprimer()">
+
+        <i class="fa-solid fa-trash"></i>
+
+        Supprimer
+
+    </button>
+</div> -->

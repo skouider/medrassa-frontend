@@ -1,0 +1,565 @@
+<!-- <div class="card">
+    <div class="card-header text-center">Liste des Classes </div>
+    <div class="card-body">
+        <div class="table-responsive">
+
+            <div class="card shadow-sm border-0 mb-4">
+
+                <div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                    <div class="dropdown">
+
+                        <button class="btn btn-success dropdown-toggle px-4" type="button" (click)="isOpen=!isOpen">
+
+                            📅 {{ sessionSelectionnee!.libelle || 'Choisir une session' }}
+
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow d-block" *ngIf="isOpen">
+
+                            <li *ngFor="let s of sessionliste">
+
+                                <a class="dropdown-item" (click)="selectionnerSession(s)" style="cursor: pointer;">
+
+                                    {{ s.libelle }}
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div>
+                        <button class="btn btn-success" (click)="nouvelleClasse()">
+
+                            Nouvelle classe
+
+                        </button>
+                    </div>
+                    <div class="btn-group">
+
+                        <button class="btn btn-success" (click)="loadAllClasses()">
+                            Toutes
+                        </button>
+
+                        <button class="btn btn-outline-success" (click)="afficherCoran()">
+                            📖 Coran
+                        </button>
+
+                        <button class="btn btn-outline-success" (click)="afficherPrepa()">
+                            🎒 Préparatoire
+                        </button>
+
+                        <button class="btn btn-outline-success" (click)="afficherGarcons()">
+                            👦 Garçons
+                        </button>
+
+                        <button class="btn btn-outline-success" (click)="afficherFilles()">
+                            👧 Filles
+                        </button>
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <table class="table table-striped-columns table-hover text-center
+             align-middle w-100">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nom de Classe</th>
+                        <th scope="col">Genre</th>
+                        <th scope="col">Capacite</th>
+                        <th scope="col">Type de Classe</th>
+                        <th scope="col">Age Min</th>
+                        <th scope="col">Age Max</th>
+                        <th scope="col">Session</th>
+                        <th scope="col">Places Disponibles</th>
+                        <th scope="col">Nb Inscrits</th>
+                        <th>Occupation</th>
+                        <th scope="col">Etat</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let c of classes$ | async" (click)="_selectedClasse(c)" style="cursor: pointer;">
+
+                        <td>{{c.id}} </td>
+                        <td>{{c.nom}}</td>
+                        <td>
+
+                            <span *ngIf="c.genre=='GARCON'" class="badge bg-info">
+
+                                Garçons
+
+                            </span>
+
+                            <span *ngIf="c.genre=='FILLE'" class="badge bg-danger">
+
+                                Filles
+
+                            </span>
+
+                            <span *ngIf="c.genre=='MIXTE'" class="badge bg-secondary">
+
+                                👥 Mixte
+
+                            </span>
+
+                        </td>
+                        <td>{{c.capacite}}</td>
+                        <td>
+
+                            <span *ngIf="c.typeClasse == 'CORAN'" class="badge bg-success">
+
+                                📖 Coran
+
+                            </span>
+
+                            <span *ngIf="c.typeClasse == 'PREPARATOIRE'" class="badge bg-primary">
+
+                                🎒 Préparatoire
+
+                            </span>
+
+                        </td>
+                        <td>{{c.ageMin}}</td>
+                        <td>{{c.ageMax}}</td>
+                        <td>{{c.session?.libelle}}</td>
+                        <td>{{c.placesDisponibles}}</td>
+                        <td>{{c.nombreInscrits}}</td>
+                        <td style="width:180px">
+
+                            <div class="progress">
+
+                                <div class="progress-bar bg-success"
+                                    [style.width.%]="(c.nombreInscrits! / c.capacite!) * 100">
+
+                                    {{ ((c.nombreInscrits! / c.capacite!) * 100).toFixed(0) }}%
+
+                                </div>
+
+                            </div>
+
+                        </td>
+                        <td>
+
+                            <span *ngIf="!c.complet" class="badge bg-success">
+
+                                ✅ Ouverte
+
+                            </span>
+
+                            <span *ngIf="c.complet" class="badge bg-danger">
+
+                                ⛔ Complète
+
+                            </span>
+
+                        </td>
+                        <td>
+
+                            <button class="btn btn-sm btn-outline-success"
+                            (click)="voirEleves(c); $event.stopPropagation()">
+                                
+                                <i class="fa-solid fa-users"></i>
+
+                                Élèves
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card-footer"></div>
+</div> -->
+<div class="card shadow-sm border-0 mb-4" dir="rtl">
+
+```
+<div class="card-body d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+    <!-- اختيار الدورة -->
+    <div class="dropdown">
+
+        <button
+            class="btn btn-success dropdown-toggle px-4"
+            type="button"
+            (click)="isOpen = !isOpen">
+
+            📅 {{ sessionSelectionnee?.libelle || 'اختر دورة التسجيل' }}
+
+        </button>
+
+        <ul
+            class="dropdown-menu dropdown-menu-end shadow d-block"
+            *ngIf="isOpen">
+
+            <li *ngFor="let s of sessionliste">
+
+                <a
+                    class="dropdown-item"
+                    (click)="selectionnerSession(s)"
+                    style="cursor: pointer;">
+
+                    {{ s.libelle }}
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- Nouvelle classe -->
+    <div>
+
+        <button
+            class="btn btn-success"
+            type="button"
+            (click)="nouvelleClasse()">
+
+            <i class="fa-solid fa-plus ms-1"></i>
+
+           مسح القسم 
+
+        </button>
+
+    </div>
+
+
+    <!-- Filtres -->
+    <div class="btn-group">
+
+        <!-- Toutes -->
+        <button
+            class="btn btn-success"
+            type="button"
+            (click)="loadAllClasses()">
+
+            الكل
+
+        </button>
+
+
+        <!-- Coran -->
+        <button
+            class="btn btn-outline-success"
+            type="button"
+            (click)="afficherCoran()">
+
+            📖 القرآن
+
+        </button>
+
+
+        <!-- Préparatoire -->
+        <button
+            class="btn btn-outline-success"
+            type="button"
+            (click)="afficherPrepa()">
+
+            🎒 التحضيري
+
+        </button>
+
+
+        <!-- Garçons -->
+        <button
+            class="btn btn-outline-success"
+            type="button"
+            (click)="afficherGarcons()">
+
+            👦 ذكور
+
+        </button>
+
+
+        <!-- Filles -->
+        <button
+            class="btn btn-outline-success"
+            type="button"
+            (click)="afficherFilles()">
+
+            👧 إناث
+
+        </button>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<!-- Liste des classes -->
+
+<div class="table-responsive">
+
+```
+<table
+    class="table table-striped-columns table-hover text-center align-middle w-100"
+    dir="rtl">
+
+    <thead>
+
+        <tr>
+
+            <th>الرقم</th>
+
+            <th>اسم القسم</th>
+
+            <th>الجنس</th>
+
+            <th>السعة</th>
+
+            <th>نوع القسم</th>
+
+            <th>الحد الأدنى للعمر</th>
+
+            <th>الحد الأقصى للعمر</th>
+
+            <th>الدورة</th>
+
+            <th>الأماكن المتاحة</th>
+
+            <th>عدد المسجلين</th>
+
+            <th>نسبة الإشغال</th>
+
+            <th>الحالة</th>
+
+            <th>الإجراءات</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        <tr
+            *ngFor="let c of classes$ | async"
+            (click)="_selectedClasse(c)"
+            style="cursor: pointer;">
+
+
+            <!-- ID -->
+            <td>
+                {{ c.id }}
+            </td>
+
+
+            <!-- Nom -->
+            <td class="fw-bold">
+                {{ c.nom }}
+            </td>
+
+
+            <!-- Genre -->
+            <td>
+
+                <span
+                    *ngIf="c.genre === 'GARCON'"
+                    class="badge bg-info">
+
+                    ذكور
+
+                </span>
+
+
+                <span
+                    *ngIf="c.genre === 'FILLE'"
+                    class="badge bg-danger">
+
+                    إناث
+
+                </span>
+
+
+                <span
+                    *ngIf="c.genre === 'MIXTE'"
+                    class="badge bg-secondary">
+
+                    👥 مختلط
+
+                </span>
+
+            </td>
+
+
+            <!-- Capacité -->
+            <td>
+                {{ c.capacite }}
+            </td>
+
+
+            <!-- Type -->
+            <td>
+
+                <span
+                    *ngIf="c.typeClasse === 'CORAN'"
+                    class="badge bg-success">
+
+                    📖 المدرسة القرآنية
+
+                </span>
+
+
+                <span
+                    *ngIf="c.typeClasse === 'PREPARATOIRE'"
+                    class="badge bg-primary">
+
+                    🎒 الأقسام التحضيرية
+
+                </span>
+
+            </td>
+
+
+            <!-- Age minimum -->
+            <td>
+                {{ c.ageMin }}
+            </td>
+
+
+            <!-- Age maximum -->
+            <td>
+                {{ c.ageMax }}
+            </td>
+
+
+            <!-- Session -->
+            <td>
+                {{ c.session?.libelle }}
+            </td>
+
+
+            <!-- Places disponibles -->
+            <td>
+
+                <span
+                    class="badge"
+                    [ngClass]="
+                        c.placesDisponibles! > 0
+                        ? 'bg-success'
+                        : 'bg-danger'
+                    ">
+
+                    {{ c.placesDisponibles }}
+
+                </span>
+
+            </td>
+
+
+            <!-- Nombre inscrits -->
+            <td>
+
+                <span class="fw-bold">
+                    {{ c.nombreInscrits }}
+                </span>
+
+            </td>
+
+
+            <!-- Occupation -->
+            <td style="width: 180px; min-width: 180px;">
+
+                <div class="progress">
+
+                    <div
+                        class="progress-bar bg-success"
+                        [style.width.%]="
+                            (c.nombreInscrits! / c.capacite!) * 100
+                        ">
+
+                        {{
+                            (
+                                (c.nombreInscrits! / c.capacite!) * 100
+                            ).toFixed(0)
+                        }}%
+
+                    </div>
+
+                </div>
+
+            </td>
+
+
+            <!-- Etat -->
+            <td>
+
+                <span
+                    *ngIf="!c.complet"
+                    class="badge bg-success">
+
+                    ✅ مفتوح
+
+                </span>
+
+
+                <span
+                    *ngIf="c.complet"
+                    class="badge bg-danger">
+
+                    ⛔ مكتمل
+
+                </span>
+
+            </td>
+
+
+            <!-- Actions -->
+            <td>
+
+                <button
+                    type="button"
+                    class="btn btn-sm btn-outline-success"
+                    (click)="voirEleves(c); $event.stopPropagation()">
+
+                    <i class="fa-solid fa-users ms-1"></i>
+
+                    التلاميذ
+
+                </button>
+
+            </td>
+
+        </tr>
+
+
+        <!-- Aucun résultat -->
+        <tr *ngIf="(classes$ | async)?.length === 0">
+
+            <td
+                colspan="13"
+                class="text-muted text-center py-4">
+
+                لا توجد أقسام متاحة
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+```
+
+</div>
+
+<div class="card-footer"></div>

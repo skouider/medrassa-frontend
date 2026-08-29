@@ -1,0 +1,192 @@
+<!-- <div class="card">
+    <div class="card-header fw-bold
+                 d-flex align-items-center
+                  justify-content-center fs-1">Liste Sessions</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover text-center
+             align-middle w-100" style="table-layout: fixed;">
+                <thead>
+                    <tr>
+                        <th scope="col">Actions</th>
+                        <th scope="col">Libelle</th>
+                        <th scope="col">Date Ouverture</th>
+                        <th scope="col">Date Fermeture</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">Nombre De Classes</th>
+                        <th scope="col">Type de Classe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of sessions$ | async">
+
+                        <td><button type="button" class="btn btn-outline-info fa fa-minus w-100"
+                                (click)="_selectedSession(s)"> Modifier
+                            </button> </td>
+                        <td>{{s.libelle}} </td>
+                        <td>{{s.dateOuverture}} </td>
+                        <td>{{s.dateFermeture}} </td>
+                        <td>
+                            <span class="badge bg-danger" *ngIf="s.active == false">
+                                Fermer
+                            </span>
+                            <span class="badge bg-success" *ngIf="s.active == true">
+                                Active
+                            </span>
+                        </td>
+                        <td>{{s.nombreClasses}} </td>
+                        <td>
+                            <span *ngFor="let c of s.configurations" class="badge bg-success me-1">
+
+                                {{ c }}
+
+                            </span>
+                        </td>
+                        
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="card-footer"></div>
+</div> -->
+
+<div class="card" dir="rtl">
+
+    <div class="card-header fw-bold text-center fs-1">
+        قائمة دورات التسجيل
+    </div>
+
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-hover text-center
+                         align-middle w-100" style="table-layout: fixed;">
+
+                <thead>
+
+                    <tr>
+
+                        <th scope="col">
+                            الإجراءات
+                        </th>
+
+                        <th scope="col">
+                            اسم الدورة
+                        </th>
+
+                        <th scope="col">
+                            تاريخ الافتتاح
+                        </th>
+
+                        <th scope="col">
+                            تاريخ الاختتام
+                        </th>
+
+                        <th scope="col">
+                            الحالة
+                        </th>
+
+                        <th scope="col">
+                            عدد الأقسام
+                        </th>
+
+                        <th scope="col">
+                            نوع القسم
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    <tr *ngFor="let s of sessions$ | async">
+
+                        <!-- الإجراءات -->
+                        <td>
+
+                            <button type="button" class="btn btn-outline-info w-100" (click)="_selectedSession(s)">
+
+                                <i class="fas fa-edit"></i>
+
+                                تعديل
+
+                            </button>
+
+                        </td>
+
+
+                        <!-- اسم الدورة -->
+                        <td>
+                            {{ s.libelle }}
+                        </td>
+
+
+                        <!-- تاريخ الافتتاح -->
+                        <td>
+                            {{ s.dateOuverture }}
+                        </td>
+
+
+                        <!-- تاريخ الاختتام -->
+                        <td>
+                            {{ s.dateFermeture }}
+                        </td>
+
+
+                        <!-- الحالة -->
+                        <td>
+
+                            <span class="badge bg-danger" *ngIf="s.active == false">
+
+                                مغلقة
+
+                            </span>
+
+
+                            <span class="badge bg-success" *ngIf="s.active == true">
+
+                                مفتوحة
+
+                            </span>
+
+                        </td>
+
+
+                        <!-- عدد الأقسام -->
+                        <td>
+                            {{ s.nombreClasses }}
+                        </td>
+
+
+                        <!-- أنواع الأقسام -->
+                        <td>
+
+                            <span *ngFor="let c of s.configurations" class="badge bg-success me-1">
+
+                                {{ c === 'CORAN' ? 'مدرسة القرآنية' : 'الأقسام التحضيرية' }}
+
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <div class="card-footer"></div>
+
+</div>
