@@ -5,7 +5,7 @@
     <!-- FORMULAIRE ÉCOLE CORANIQUE (type === 'coran') -->
     <!-- ========================================== -->
     <div *ngIf="type === 'coran'">
-      
+
       <!-- ÉTAPE 1 : Catégorie -->
       <div *ngIf="step === 1" class="text-center py-5 animate__animated animate__fadeIn">
         <h2 class="fw-bold text-[#064e3b] mb-5">يرجى تحديد فئة الطالب</h2>
@@ -26,22 +26,27 @@
       </div>
 
       <!-- ÉTAPE 2 : Formulaire Coran -->
-      <div *ngIf="step === 2" class="card border-0 shadow-lg rounded-4 p-4 p-md-5 mx-auto animate__animated animate__slideInUp" style="max-width: 900px;">
+      <div *ngIf="step === 2"
+        class="card border-0 shadow-lg rounded-4 p-4 p-md-5 mx-auto animate__animated animate__slideInUp"
+        style="max-width: 900px;">
         <h2 class="text-center fw-bold text-[#064e3b] mb-5">استمارة تسجيل المدرسة القرآنية</h2>
-        
+
         <form (ngSubmit)="submit()">
           <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label fw-bold">اللقب</label>
-              <input type="text" name="nom" [(ngModel)]="inscriptionData.nom" class="form-control custom-input" required>
+              <input type="text" name="nom" [(ngModel)]="inscriptionData.nom" class="form-control custom-input"
+                required>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">الاسم</label>
-              <input type="text" name="prenom" [(ngModel)]="inscriptionData.prenom" class="form-control custom-input" required>
+              <input type="text" name="prenom" [(ngModel)]="inscriptionData.prenom" class="form-control custom-input"
+                required>
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">تاريخ الميلاد</label>
-              <input type="date" name="dateNaissance" [(ngModel)]="inscriptionData.dateNaissance" class="form-control custom-input">
+              <input type="date" name="dateNaissance" [(ngModel)]="inscriptionData.dateNaissance"
+                class="form-control custom-input">
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">الجنس</label>
@@ -52,16 +57,17 @@
             </div>
             <div class="col-md-6" *ngIf="isChild">
               <label class="form-label fw-bold text-success">اسم ولي الأمر</label>
-              <input type="text" name="nomTuteur" [(ngModel)]="inscriptionData.nomTuteur" class="form-control custom-input">
+              <input type="text" name="nomTuteur" [(ngModel)]="inscriptionData.nomTuteur"
+                class="form-control custom-input">
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">رقم الهاتف</label>
-              <input type="tel" name="telephone" [(ngModel)]="inscriptionData.telephone" class="form-control custom-input">
+              <input type="tel" name="telephone" [(ngModel)]="inscriptionData.telephone"
+                class="form-control custom-input">
             </div>
             <div class="col-12 mt-5 d-flex gap-3">
-              <button
-              
-               type="submit" class="btn btn-success flex-grow-1 py-3 rounded-pill fw-bold shadow-sm">تأكيد الطلب</button>
+              <button type="submit" class="btn btn-success flex-grow-1 py-3 rounded-pill fw-bold shadow-sm">تأكيد
+                الطلب</button>
               <button type="button" (click)="step = 1" class="btn btn-light px-4 rounded-pill">رجوع</button>
             </div>
           </div>
@@ -73,22 +79,37 @@
     <!-- FORMULAIRE PRÉSCOLAIRE (type === 'prep') -->
     <!-- ========================================== -->
     <div *ngIf="type === 'prep'">
-      
+
       <!-- ÉTAPE 2 : Formulaire Prépa (Directement ici car c'est pour enfants d'office) -->
-      <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 mx-auto animate__animated animate__fadeInUp" style="max-width: 950px;">
+      <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 mx-auto animate__animated animate__fadeInUp"
+        style="max-width: 950px;">
         <h2 class="text-center fw-bold text-[#064e3b] mb-4">استمارة التسجيل التحضيري</h2>
-        
+
         <form (ngSubmit)="submit()">
           <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label fw-bold">اسم الطفل</label>
-              <input type="text" name="prenomPrep" [(ngModel)]="inscriptionData.prenom" class="form-control custom-input">
+              <input type="text" name="prenomPrep" [(ngModel)]="inscriptionData.prenom"
+                class="form-control custom-input">
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">لقب الطفل</label>
               <input type="text" name="nomPrep" [(ngModel)]="inscriptionData.nom" class="form-control custom-input">
             </div>
-
+            <!-- CHAMP DATE DE NAISSANCE AJOUTÉ ICI -->
+            <div class="col-md-6">
+              <label class="form-label fw-bold">تاريخ الميلاد</label>
+              <input type="date" name="dateNaissancePrep" [(ngModel)]="inscriptionData.dateNaissance"
+                class="form-control custom-input" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-bold">الجنس</label>
+              <select name="genrePrep" [(ngModel)]="inscriptionData.genre" class="form-select custom-input" required>
+                <option value="" disabled selected>اختر الجنس</option>
+                <option value="GARCON">ذكر</option>
+                <option value="FILLE">أنثى</option>
+              </select>
+            </div>
             <div class="col-12 mt-4">
               <div class="p-4 rounded-4 border-start border-4 border-success bg-green-50/30">
                 <div class="row g-3">
@@ -102,14 +123,14 @@
                   </div>
                   <div class="col-md-6">
                     <label class="form-label fw-bold">هل سبق له دخول الروضة؟</label>
-                    <select name="deja"  class="form-select custom-input">
+                    <select name="deja" class="form-select custom-input">
                       <option [ngValue]="false">لا</option>
                       <option [ngValue]="true">نعم</option>
                     </select>
                   </div>
                   <div class="col-md-12">
                     <label class="form-label fw-bold">ملاحظات صحية</label>
-                    <textarea name="sante"  class="form-control rounded-4 custom-input" rows="2"></textarea>
+                    <textarea name="sante" class="form-control rounded-4 custom-input" rows="2"></textarea>
                   </div>
                 </div>
               </div>
@@ -117,18 +138,19 @@
 
             <div class="col-md-6">
               <label class="form-label fw-bold text-success">اسم ولي الأمر</label>
-              <input type="text" name="tuteurPrep" [(ngModel)]="inscriptionData.nomTuteur" class="form-control custom-input">
+              <input type="text" name="tuteurPrep" [(ngModel)]="inscriptionData.nomTuteur"
+                class="form-control custom-input">
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">رقم هاتف الولي</label>
-              <input type="tel" name="telPrep" [(ngModel)]="inscriptionData.telephone" class="form-control custom-input">
+              <input type="tel" name="telPrep" [(ngModel)]="inscriptionData.telephone"
+                class="form-control custom-input">
             </div>
 
             <div class="col-12 mt-5">
-              <button type="submit" 
-              class="btn btn-success w-100 py-3 rounded-pill fw-bold shadow">إرسال الطلب</button>
-              <button type="button" (click)="step = 1" class="btn btn-light px-4 rounded-pill">رجوع</button>  
-          </div>
+              <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold shadow">إرسال الطلب</button>
+              <button type="button" (click)="step = 1" class="btn btn-light px-4 rounded-pill">رجوع</button>
+            </div>
           </div>
         </form>
       </div>
@@ -136,14 +158,3 @@
 
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-

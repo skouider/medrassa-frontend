@@ -30,8 +30,42 @@ export class SessionService {
 
   }
 
+  public addSession() {
+  // 1. Sauvegarder d'abord la session (sans les configurations)
+  this.http.post<SessionOuvertureDTO>(this.baseUrl, this.currentSession).subscribe({
+    next: (sessionCreee) => {
+      
+      // 2. Si des types ont été cochés, enregistrer les configurations pour cette session
+      if (this.typesSelectionnes.length > 0 && sessionCreee.id) {
+        this.http.put(`${this.baseUrl}/${sessionCreee.id}/configuration`, this.typesSelectionnes)
+          .subscribe({
+            next: () => {
+              this.loadSessions();
+              this.resetForm();
+              alert("Session créée et configurée avec succès !");
+            },
+            error: (err) => alert("Erreur lors de la configuration : " + err.error.message)
+          });
+      } else {
+        this.loadSessions();
+        this.resetForm();
+        alert("Session créée avec succès !");
+      }
 
- public addSession() {
+    },
+    error: (err) => {
+      alert(err.error.message);
+    }
+  });
+}
+
+// Petite méthode d'aide pour réinitialiser
+private resetForm() {
+  this.currentSession = new SessionOuvertureDTO();
+  this.typesSelectionnes = [];
+}
+
+/*  public addSession() {
 
     // Copier les types choisis dans le DTO envoyé au backend
     this.currentSession.configurations = [...this.typesSelectionnes];
@@ -61,7 +95,7 @@ export class SessionService {
 
     });
 
-}
+} */
 
   public editSession(id: number) {
     this.currentSession.configurations = [...this.typesSelectionnes];

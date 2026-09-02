@@ -70,13 +70,7 @@ export class Inscription implements OnInit {
 
 
   submit() {
-    console.log('===== AVANT ENVOI =====');
-    console.log('Type :', this.type);
-    console.log('Enfant :', this.isChild);
-    console.log('Inscription :', this.inscriptionData);
-    console.log('Date naissance :', this.inscriptionData.dateNaissance);
-    console.log('Genre :', this.inscriptionData.genre);
-
+    
 
     if (this.type === 'coran') {
       this.inscriptionData.typeClasse = TypeClasse.CORAN;
@@ -84,15 +78,14 @@ export class Inscription implements OnInit {
       this.inscriptionData.typeClasse = TypeClasse.PREPARATOIRE;
     }
 
-    console.log('DTO envoyé :', this.inscriptionData);
+    
 
     this.inscriptionService.saveInscription(this.inscriptionData)
       .subscribe({
 
         next: (response) => {
 
-          console.log('REPONSE BACKEND :', response);
-
+    
 
           if (response.statut === StatutInscription.VALIDEE) {
 
