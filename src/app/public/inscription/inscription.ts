@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, NgForm, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { InscriptionDto } from '../../dto/inscription-request.dto';
 import { NgModel } from '@angular/forms'
@@ -8,6 +8,7 @@ import { InscriptionService } from '../../services/inscription.service';
 import { InscriptionResponseDto } from '../../dto/inscription-response.dto';
 import { TypeClasse } from '../../models/type-classe.enum';
 import { StatutInscription } from '../../models/statut-inscription.enum';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inscription',
@@ -42,23 +43,11 @@ export class Inscription implements OnInit {
 
   }
 
-/*   setAgeGroup(group: string) {
-    this.isChild = (group === 'child');
-    this.step = 2;
-
-    // Si c'est Prepa + Enfant, on rend certains champs obligatoires
-    if (this.type === 'prepa' && this.isChild) {
-      this.inscriptionForm.get('niveauScolaire')?.setValidators([Validators.required]);
-    }
-  } */
 
     setAgeGroup(group: 'child' | 'adult') {
 
   this.isChild = group === 'child';
 
-  console.log('===== GROUPE SELECTIONNE =====');
-  console.log('Groupe :', group);
-  console.log('Enfant :', this.isChild);
 
   this.step = 2;
 }
@@ -69,8 +58,12 @@ export class Inscription implements OnInit {
   }
 
 
-  submit() {
+  submit(form:NgForm) {
     
+    if(form.invalid){
+      form.control.markAllAsTouched();
+      return;
+    }
 
     if (this.type === 'coran') {
       this.inscriptionData.typeClasse = TypeClasse.CORAN;
@@ -111,11 +104,88 @@ export class Inscription implements OnInit {
         },
 
         error: (err) => {
-          console.error('ERREUR :', err);
+          
+        console.error('ERREUR INSCRIPTION =', err);
+        console.error('STATUS =', err.status);
+        console.error('ERROR =', err.error);
 
-          alert(err.error.message);
+        // Message envoyé par Spring
+        const message = err.error?.message;
 
+        // --------------------------------------
+        // AGE NON COMPATIBLE
+        // --------------------------------------
+
+        if (
+          message &&
+          message.includes('ne correspond à aucune classe')
+        ) {
+
+          Swal.fire({
+            icon: 'error',
+            title: 'عذراً',
+            text: 'عذراً، سنّ الطفل غير مناسب لهذا القسم.',
+            confirmButtonText: 'حسناً'
+          });
+
+          return;
         }
+
+
+        // --------------------------------------
+        // AUCUNE CLASSE DISPONIBLE
+        // --------------------------------------
+
+        if (
+          message &&
+          message.includes('Aucune classe disponible')
+        ) {
+
+          Swal.fire({
+            icon: 'warning',
+            title: 'تنبيه',
+            text: 'لا يوجد قسم مناسب لهذا الجنس حالياً.',
+            confirmButtonText: 'حسناً'
+          });
+
+          return;
+        }
+
+
+        // --------------------------------------
+        // ÉLÈVE DÉJÀ INSCRIT
+        // --------------------------------------
+
+        if (
+          message &&
+          message.includes('déjà inscrit')
+        ) {
+
+          Swal.fire({
+            icon: 'warning',
+            title: 'تنبيه',
+            text: 'هذا الطفل مسجل بالفعل في هذه الدورة.',
+            confirmButtonText: 'حسناً'
+          });
+
+          return;
+        }
+
+
+        // --------------------------------------
+        // AUTRE ERREUR
+        // --------------------------------------
+
+        Swal.fire({
+          icon: 'error',
+          title: 'خطأ',
+          text: message || 'حدث خطأ أثناء إرسال طلب التسجيل.',
+          confirmButtonText: 'حسناً'
+        });
+
+      }
+
+
 
       });
 

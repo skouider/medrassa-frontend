@@ -31,39 +31,89 @@
         style="max-width: 900px;">
         <h2 class="text-center fw-bold text-[#064e3b] mb-5">استمارة تسجيل المدرسة القرآنية</h2>
 
-        <form (ngSubmit)="submit()">
+        <form #coranForm="ngForm" (ngSubmit)="submit(coranForm)" novalidate>
           <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label fw-bold">اللقب</label>
-              <input type="text" name="nom" [(ngModel)]="inscriptionData.nom" class="form-control custom-input"
-                required>
+              <input type="text" required name="nom" [(ngModel)]="inscriptionData.nom" class="form-control custom-input"
+                #nom="ngModel" required>
+              <div *ngIf="nom.invalid && (nom.touched || coranForm.submitted)" class="text-danger mt-1">
+
+                يرجى إدخال اللقب
+
+              </div>
+
             </div>
+
+
+
             <div class="col-md-6">
               <label class="form-label fw-bold">الاسم</label>
-              <input type="text" name="prenom" [(ngModel)]="inscriptionData.prenom" class="form-control custom-input"
-                required>
+              <input type="text" required name="prenom" [(ngModel)]="inscriptionData.prenom"
+                class="form-control custom-input" required #prenom="ngModel">
+              <div *ngIf="prenom.invalid && (prenom.touched || coranForm.submitted)" class="text-danger mt-1">
+
+                يرجى إدخال الاسم
+
+              </div>
+
+
             </div>
+
             <div class="col-md-6">
               <label class="form-label fw-bold">تاريخ الميلاد</label>
-              <input type="date" name="dateNaissance" [(ngModel)]="inscriptionData.dateNaissance"
-                class="form-control custom-input">
+              <input type="date" required name="dateNaissance" [(ngModel)]="inscriptionData.dateNaissance"
+                class="form-control custom-input" #dateNaissance="ngModel">
+
+              <div *ngIf="dateNaissance.invalid && (dateNaissance.touched || coranForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى إدخال تاريخ الميلاد
+
+              </div>
+
             </div>
+
+
             <div class="col-md-6">
               <label class="form-label fw-bold">الجنس</label>
-              <select name="genre" [(ngModel)]="inscriptionData.genre" class="form-select custom-input">
+
+              <select name="genre" required [(ngModel)]="inscriptionData.genre" class="form-select custom-input"
+                #genre="ngModel">
                 <option value="GARCON">ذكر</option>
                 <option value="FILLE">أنثى</option>
               </select>
+              <div *ngIf="genre.invalid && (genre.touched || coranForm.submitted)" class="text-danger mt-1">
+
+                يرجى اختيار الجنس
+
+              </div>
+
             </div>
+
             <div class="col-md-6" *ngIf="isChild">
               <label class="form-label fw-bold text-success">اسم ولي الأمر</label>
               <input type="text" name="nomTuteur" [(ngModel)]="inscriptionData.nomTuteur"
-                class="form-control custom-input">
+                class="form-control custom-input" [required]="isChild" #nomTuteur="ngModel">
+              <div *ngIf="nomTuteur.invalid && (nomTuteur.touched || coranForm.submitted)" class="text-danger mt-1">
+
+                يرجى إدخال اسم ولي الأمر
+
+              </div>
+
+
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">رقم الهاتف</label>
               <input type="tel" name="telephone" [(ngModel)]="inscriptionData.telephone"
-                class="form-control custom-input">
+                class="form-control required custom-input" #telephone="ngModel">
+              <div *ngIf="telephone.invalid && (telephone.touched || coranForm.submitted)" class="text-danger mt-1">
+
+                يرجى إدخال رقم الهاتف
+
+              </div>
+
+
             </div>
             <div class="col-12 mt-5 d-flex gap-3">
               <button type="submit" class="btn btn-success flex-grow-1 py-3 rounded-pill fw-bold shadow-sm">تأكيد
@@ -85,66 +135,105 @@
         style="max-width: 950px;">
         <h2 class="text-center fw-bold text-[#064e3b] mb-4">استمارة التسجيل التحضيري</h2>
 
-        <form (ngSubmit)="submit()">
+        <form #prepForm="ngForm"
+         (ngSubmit)="submit(prepForm)">
           <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label fw-bold">اسم الطفل</label>
               <input type="text" name="prenomPrep" [(ngModel)]="inscriptionData.prenom"
-                class="form-control custom-input">
-            </div>
+                class="form-control custom-input" required #prenomPrep="ngModel">
+          <div
+                *ngIf="prenomPrep.invalid && (prenomPrep.touched || prepForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى إدخال اسم الطفل
+
+              </div>
+  
+          
+          </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">لقب الطفل</label>
-              <input type="text" name="nomPrep" [(ngModel)]="inscriptionData.nom" class="form-control custom-input">
+              <input type="text" name="nomPrep" required [(ngModel)]="inscriptionData.nom"
+                class="form-control custom-input" #nomPrep="ngModel">
+
+                <div
+                *ngIf="nomPrep.invalid && (nomPrep.touched || prepForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى إدخال لقب الطفل
+
+              </div>
+
             </div>
             <!-- CHAMP DATE DE NAISSANCE AJOUTÉ ICI -->
             <div class="col-md-6">
               <label class="form-label fw-bold">تاريخ الميلاد</label>
-              <input type="date" name="dateNaissancePrep" [(ngModel)]="inscriptionData.dateNaissance"
-                class="form-control custom-input" required>
+              <input type="date" name="dateNaissancePrep" required [(ngModel)]="inscriptionData.dateNaissance"
+                class="form-control custom-input" required #dateNaissancePrep="ngModel">
+                <div
+                *ngIf="dateNaissancePrep.invalid && (dateNaissancePrep.touched || prepForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى إدخال تاريخ الميلاد
+
+              </div>
+
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">الجنس</label>
-              <select name="genrePrep" [(ngModel)]="inscriptionData.genre" class="form-select custom-input" required>
+              <select name="genrePrep" [(ngModel)]="inscriptionData.genre" class="form-select custom-input"
+                required #genrePrep="ngModel">
                 <option value="" disabled selected>اختر الجنس</option>
                 <option value="GARCON">ذكر</option>
                 <option value="FILLE">أنثى</option>
               </select>
+              <div
+                *ngIf="genrePrep.invalid && (genrePrep.touched || prepForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى اختيار الجنس
+
+              </div>
+
             </div>
             <div class="col-12 mt-4">
-              <div class="p-4 rounded-4 border-start border-4 border-success bg-green-50/30">
+              <div class="p-4 rounded-4 border-start border-4 border-success
+               bg-green-50/30">
                 <div class="row g-3">
-                  <div class="col-md-6">
-                    <label class="form-label fw-bold">المستوى المطلوب</label>
-                    <select name="niveau" class="form-select custom-input">
-                      <option value="petite">روضة أولى</option>
-                      <option value="moyenne">روضة ثانية</option>
-                      <option value="grande">تمهيدي</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label fw-bold">هل سبق له دخول الروضة؟</label>
-                    <select name="deja" class="form-select custom-input">
-                      <option [ngValue]="false">لا</option>
-                      <option [ngValue]="true">نعم</option>
-                    </select>
-                  </div>
-                  <div class="col-md-12">
-                    <label class="form-label fw-bold">ملاحظات صحية</label>
-                    <textarea name="sante" class="form-control rounded-4 custom-input" rows="2"></textarea>
-                  </div>
+
+
                 </div>
               </div>
             </div>
 
             <div class="col-md-6">
               <label class="form-label fw-bold text-success">اسم ولي الأمر</label>
-              <input type="text" name="tuteurPrep" [(ngModel)]="inscriptionData.nomTuteur"
-                class="form-control custom-input">
+              <input type="text" required name="tuteurPrep" 
+              [(ngModel)]="inscriptionData.nomTuteur"
+                class="form-control custom-input" #tuteurPrep="ngModel">
             </div>
+            <div
+                *ngIf="tuteurPrep.invalid && (tuteurPrep.touched || prepForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى إدخال اسم ولي الأمر
+
+              </div>
+
             <div class="col-md-6">
               <label class="form-label fw-bold">رقم هاتف الولي</label>
-              <input type="tel" name="telPrep" [(ngModel)]="inscriptionData.telephone"
-                class="form-control custom-input">
+              <input type="tel" required 
+              name="telPrep" [(ngModel)]="inscriptionData.telephone"
+                class="form-control custom-input" #telPrep="ngModel">
+                <div
+                *ngIf="telPrep.invalid && (telPrep.touched || prepForm.submitted)"
+                class="text-danger mt-1">
+
+                يرجى إدخال رقم هاتف الولي
+
+              </div>
+
             </div>
 
             <div class="col-12 mt-5">

@@ -16,8 +16,8 @@
                 </select> -->
                 <select class="form-select" [(ngModel)]="sessionSelectionnee" name="sessionSelectionnee"
                     (change)="onSessionChange()">
-                        
-                    
+
+
 
 
                     <option *ngFor="let s of listSession" [ngValue]="s">
@@ -29,8 +29,9 @@
             <div class="mb-3 text-center">
                 <label for="exampleFormControlInput1" class="form-label">القسم</label>
 
-                <select class="form-select" [(ngModel)]="classeSelectionnee" name="classeSelectionnee">
-                    
+                <select class="form-select" [(ngModel)]="classeSelectionnee" 
+                name="classeSelectionnee" required>
+
 
                     <option *ngFor="let c of listeClasse" [ngValue]="c">
                         {{ c.nom }}
@@ -42,32 +43,46 @@
 
             <div class="mb-3 text-center">
                 <label for="exampleFormControlInput1" class="form-label ">الاسم</label>
-                <input type="text" class="form-control" [(ngModel)]="currentInscription.nom">
+                <input type="text"
+                required class="form-control" [(ngModel)]="currentInscription.nom">
             </div>
             <div class="mb-3 text-center">
                 <label for="exampleFormControlInput1" class="form-label">اللقب</label>
-                <input type="email" class="form-control" [(ngModel)]="currentInscription.prenom">
+                <input type="text" required class="form-control" [(ngModel)]="currentInscription.prenom">
             </div>
             <div class="mb-3 text-center">
                 <label for="exampleFormControlInput1" class="form-label"> تاريخ الميلاد</label>
-                <input type="date" class="form-control" [(ngModel)]="currentInscription.dateNaissance">
+                <input type="date" required class="form-control" [(ngModel)]="currentInscription.dateNaissance">
             </div>
 
             <div class="mb-3 text-center">
-                <label for="exampleFormControlInput1" class="form-label">الجنس</label>
-                {{currentInscription.genre}}
+                <label class="form-label">الجنس</label>
+
+                <select class="form-select"
+                 [(ngModel)]="currentInscription.genre" name="genre" required>
+
+                    
+
+                    <option value="GARCON">ذكر</option>
+                    <option value="FILLE">أنثى</option>
+
+                </select>
             </div>
             <div class="mb-3 text-center">
                 <label for="exampleFormControlInput1" class="form-label">العنوان</label>
-                <input type="text" class="form-control" [(ngModel)]="currentInscription.adresse">
+                <input type="text" class="form-control"
+                 [(ngModel)]="currentInscription.adresse"
+                required>
             </div>
             <div class="mb-3 text-center">
-                <label for="exampleFormControlInput1" class="form-label">        رقم الهاتف</label>
-                <input type="text" class="form-control" [(ngModel)]="currentInscription.telephone">
+                <label for="exampleFormControlInput1" class="form-label"> رقم الهاتف</label>
+                <input type="text" 
+                class="form-control" [(ngModel)]="currentInscription.telephone"
+                required>
             </div>
             <div class="mb-3 text-center">
                 <button class="btn btn-outline-info" (click)="saveOrUpdate()">
-                            {{ currentInscription.id ? 'تعديل التسجيل' : 'حفظ التسجيل' }}
+                    {{ currentInscription.id ? 'تعديل التسجيل' : 'حفظ التسجيل' }}
 
                 </button>
             </div>

@@ -127,7 +127,7 @@ private resetForm() {
   }
 
   getSessionById(id: number) {
-    this.http.get<SessionOuvertureDTO>(this.baseUrl + '/id').subscribe(data => {
+    this.http.get<SessionOuvertureDTO>(this.baseUrl + '/'+id).subscribe(data => {
       console.log(data);
 
     })

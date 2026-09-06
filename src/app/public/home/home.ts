@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.sessionService
+    /* this.sessionService
       .getConfigurationsSessionActive()
       .subscribe({
 
@@ -37,6 +37,23 @@ export class HomeComponent implements OnInit {
 
       });
 
+  } */
+ this.sessionService
+  .getConfigurationsSessionActive()
+  .subscribe({
+
+    next: data => {
+      console.log("TYPES OUVERTS =", data);
+      this.typesOuverts = data;
+    },
+
+    error: err => {
+      console.error("ERREUR SESSION ACTIVE =", err);
+      console.error("STATUS =", err.status);
+      console.error("BODY =", err.error);
+    }
+
+  });
   }
 
   selectPath(path: string) {
