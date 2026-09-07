@@ -113,6 +113,22 @@
 
               </div>
 
+              <div class="col-md-6">
+                <label class="form-label fw-bold text-success">
+                  العنوان
+                </label>
+
+                <input type="text" name="adresse" [(ngModel)]="inscriptionData.adresse"
+                  class="form-control custom-input" required #adresse="ngModel">
+
+                <div *ngIf="adresse.invalid && (adresse.touched || coranForm.submitted)" class="text-danger mt-1">
+
+                  يرجى إدخال العنوان
+
+                </div>
+              </div>
+              ```
+
 
             </div>
             <div class="col-12 mt-5 d-flex gap-3">
@@ -135,31 +151,26 @@
         style="max-width: 950px;">
         <h2 class="text-center fw-bold text-[#064e3b] mb-4">استمارة التسجيل التحضيري</h2>
 
-        <form #prepForm="ngForm"
-         (ngSubmit)="submit(prepForm)">
+        <form #prepForm="ngForm" (ngSubmit)="submit(prepForm)">
           <div class="row g-4">
             <div class="col-md-6">
               <label class="form-label fw-bold">اسم الطفل</label>
               <input type="text" name="prenomPrep" [(ngModel)]="inscriptionData.prenom"
                 class="form-control custom-input" required #prenomPrep="ngModel">
-          <div
-                *ngIf="prenomPrep.invalid && (prenomPrep.touched || prepForm.submitted)"
-                class="text-danger mt-1">
+              <div *ngIf="prenomPrep.invalid && (prenomPrep.touched || prepForm.submitted)" class="text-danger mt-1">
 
                 يرجى إدخال اسم الطفل
 
               </div>
-  
-          
-          </div>
+
+
+            </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">لقب الطفل</label>
               <input type="text" name="nomPrep" required [(ngModel)]="inscriptionData.nom"
                 class="form-control custom-input" #nomPrep="ngModel">
 
-                <div
-                *ngIf="nomPrep.invalid && (nomPrep.touched || prepForm.submitted)"
-                class="text-danger mt-1">
+              <div *ngIf="nomPrep.invalid && (nomPrep.touched || prepForm.submitted)" class="text-danger mt-1">
 
                 يرجى إدخال لقب الطفل
 
@@ -171,8 +182,7 @@
               <label class="form-label fw-bold">تاريخ الميلاد</label>
               <input type="date" name="dateNaissancePrep" required [(ngModel)]="inscriptionData.dateNaissance"
                 class="form-control custom-input" required #dateNaissancePrep="ngModel">
-                <div
-                *ngIf="dateNaissancePrep.invalid && (dateNaissancePrep.touched || prepForm.submitted)"
+              <div *ngIf="dateNaissancePrep.invalid && (dateNaissancePrep.touched || prepForm.submitted)"
                 class="text-danger mt-1">
 
                 يرجى إدخال تاريخ الميلاد
@@ -182,15 +192,13 @@
             </div>
             <div class="col-md-6">
               <label class="form-label fw-bold">الجنس</label>
-              <select name="genrePrep" [(ngModel)]="inscriptionData.genre" class="form-select custom-input"
-                required #genrePrep="ngModel">
+              <select name="genrePrep" [(ngModel)]="inscriptionData.genre" class="form-select custom-input" required
+                #genrePrep="ngModel">
                 <option value="" disabled selected>اختر الجنس</option>
                 <option value="GARCON">ذكر</option>
                 <option value="FILLE">أنثى</option>
               </select>
-              <div
-                *ngIf="genrePrep.invalid && (genrePrep.touched || prepForm.submitted)"
-                class="text-danger mt-1">
+              <div *ngIf="genrePrep.invalid && (genrePrep.touched || prepForm.submitted)" class="text-danger mt-1">
 
                 يرجى اختيار الجنس
 
@@ -209,32 +217,42 @@
 
             <div class="col-md-6">
               <label class="form-label fw-bold text-success">اسم ولي الأمر</label>
-              <input type="text" required name="tuteurPrep" 
-              [(ngModel)]="inscriptionData.nomTuteur"
+              <input type="text" required name="tuteurPrep" [(ngModel)]="inscriptionData.nomTuteur"
                 class="form-control custom-input" #tuteurPrep="ngModel">
             </div>
-            <div
-                *ngIf="tuteurPrep.invalid && (tuteurPrep.touched || prepForm.submitted)"
-                class="text-danger mt-1">
+            <div *ngIf="tuteurPrep.invalid && (tuteurPrep.touched || prepForm.submitted)" class="text-danger mt-1">
 
-                يرجى إدخال اسم ولي الأمر
+              يرجى إدخال اسم ولي الأمر
 
-              </div>
+            </div>
 
             <div class="col-md-6">
               <label class="form-label fw-bold">رقم هاتف الولي</label>
-              <input type="tel" required 
-              name="telPrep" [(ngModel)]="inscriptionData.telephone"
+              <input type="tel" required name="telPrep" [(ngModel)]="inscriptionData.telephone"
                 class="form-control custom-input" #telPrep="ngModel">
-                <div
-                *ngIf="telPrep.invalid && (telPrep.touched || prepForm.submitted)"
-                class="text-danger mt-1">
+              <div *ngIf="telPrep.invalid && (telPrep.touched || prepForm.submitted)" class="text-danger mt-1">
 
                 يرجى إدخال رقم هاتف الولي
 
               </div>
 
             </div>
+            
+            <div class="col-md-6">
+              <label class="form-label fw-bold ">
+                العنوان
+              </label>
+
+              <input type="text" name="adresse" [(ngModel)]="inscriptionData.adresse" class="form-control custom-input"
+                required #adresse="ngModel">
+
+              <div *ngIf="adresse.invalid && (adresse.touched || prepForm.submitted)" class="text-danger mt-1">
+
+                يرجى إدخال العنوان
+
+              </div>
+            </div>
+            
 
             <div class="col-12 mt-5">
               <button type="submit" class="btn btn-success w-100 py-3 rounded-pill fw-bold shadow">إرسال الطلب</button>
